@@ -1,0 +1,6 @@
+# ssb-gossip
+
+
+## License
+
+MIT
