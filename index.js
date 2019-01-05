@@ -171,7 +171,7 @@ module.exports = {
 //          )
 //        })
       },
-      connect: valid.async(function (addr, cb) {
+      connect: function (addr, cb) {
         if(ref.isFeed(addr))
           addr = gossip.get(addr)
         server.emit('log:info', ['ssb-server', stringify(addr), 'CONNECTING'])
@@ -208,7 +208,7 @@ module.exports = {
           cb && cb(null, rpc)
         })
 
-      }, 'string|object'),
+      },
 
       disconnect: valid.async(function (addr, cb) {
         var peer = gossip.get(addr)
