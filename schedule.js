@@ -125,7 +125,7 @@ function (gossip, config, server) {
     if(connected.length > opts.quota) {
       return earliest(connected, connected.length - opts.quota)
         .forEach(function (peer) {
-          gossip.disconnect(peer)
+          gossip.disconnect(peer, function () {})
         })
     }
 
@@ -133,7 +133,7 @@ function (gossip, config, server) {
     var selected = select(peers, ts, and(filter, isOnline), opts)
     selected
       .forEach(function (peer) {
-        gossip.connect(peer)
+        gossip.connect(peer, function () {})
       })
   }
 
