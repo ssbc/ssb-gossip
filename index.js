@@ -210,7 +210,7 @@ module.exports = {
 
       },
 
-      disconnect: valid.async(function (addr, cb) {
+      disconnect: function (addr, cb) {
         var peer = gossip.get(addr)
 
         peer.state = 'disconnecting'
@@ -221,7 +221,7 @@ module.exports = {
           cb && cb()
         })
 
-      }, 'string|object'),
+      },
 
       changes: function () {
         return notify.listen()
@@ -230,6 +230,7 @@ module.exports = {
       add: valid.sync(function (addr, source) {
 
         if(isObject(addr)) {
+          //console.log(addr)
           addr.address = coearseAddress(addr)
         }
         else {
@@ -413,6 +414,4 @@ module.exports = {
     return gossip
   }
 }
-
-
 
