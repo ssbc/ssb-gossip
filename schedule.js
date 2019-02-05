@@ -232,7 +232,7 @@ function (gossip, config, server) {
         }
       })
 
-    }, 100*Math.random())
+    }, 1000*Math.random())
     if(timer.unref) timer.unref()
   }
 
