@@ -122,7 +122,7 @@ function (gossip, config, server) {
     var connected = peers.filter(isConnect).filter(filter)
 
     //disconnect if over quota
-    if(connected.length > opts.quota) {
+    if(connected.length > opts.quota * 2) {
       return earliest(connected, connected.length - opts.quota)
         .forEach(function (peer) {
           gossip.disconnect(peer, function () {})
