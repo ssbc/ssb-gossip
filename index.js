@@ -20,7 +20,10 @@ function isFunction (f) {
 }
 
 function stringify(peer) {
-  return [peer.host, peer.port, peer.key].join(':')
+  if(peer.host && peer.port && peer.key)
+    return [peer.host, peer.port, peer.key].join(':')
+  else
+    return peer.address
 }
 
 function isObject (o) {
@@ -172,9 +175,9 @@ module.exports = {
 //        })
       },
       connect: function (addr, cb) {
+        if(!addr) return cb(new Error('ssb-gossip.connect: address, or peer id must be provided'))
         if(ref.isFeed(addr))
           addr = gossip.get(addr)
-        server.emit('log:info', ['ssb-server', stringify(addr), 'CONNECTING'])
         if(!ref.isAddress(addr.address))
           addr = ref.parseAddress(addr)
         if (!addr || typeof addr != 'object')
@@ -183,6 +186,8 @@ module.exports = {
         if(!addr.address)
           if(!addr.key) return cb(new Error('address must have ed25519 key'))
         // add peer to the table, incase it isn't already.
+        server.emit('log:info', ['ssb-server', stringify(addr), 'CONNECTING'])
+
         gossip.add(addr, 'manual')
         var p = gossip.get(addr)
         if(!p) return cb()
