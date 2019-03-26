@@ -181,8 +181,10 @@ module.exports = {
           addr = gossip.get(addr)
           if(!addr) return cb(new Error('no known address for peer:'+id))
         }
+
         if(!ref.isAddress(addr.address))
           addr = ref.parseAddress(addr)
+
         if (!addr || typeof addr != 'object')
           return cb(new Error('first param must be an address'))
 
@@ -240,6 +242,9 @@ module.exports = {
         if(isObject(addr)) {
           //console.log(addr)
           addr.address = coearseAddress(addr)
+        }
+        else if(ref.isAddress(addr)) {
+          addr = {address: addr, key: ref.getKeyFromAddress(addr)}
         }
         else {
          var _addr = ref.parseAddress(addr)
