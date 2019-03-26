@@ -176,8 +176,11 @@ module.exports = {
       },
       connect: function (addr, cb) {
         if(!addr) return cb(new Error('ssb-gossip.connect: address, or peer id must be provided'))
-        if(ref.isFeed(addr))
+        if(ref.isFeed(addr)) {
+          const id = addr
           addr = gossip.get(addr)
+          if(!addr) return cb(new Error('no known address for peer:'+id))
+        }
         if(!ref.isAddress(addr.address))
           addr = ref.parseAddress(addr)
         if (!addr || typeof addr != 'object')
