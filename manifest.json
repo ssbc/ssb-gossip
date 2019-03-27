@@ -6,5 +6,6 @@
   "changes": "source",
   "reconnect": "sync",
   "disable": "sync",
-  "enable": "sync"
+  "enable": "sync",
+  "ping": "duplex"
 }
