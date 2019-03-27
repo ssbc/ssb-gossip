@@ -1,0 +1,10 @@
+{
+  "add": "sync",
+  "remove": "sync",
+  "connect": "async",
+  "disconnect": "async",
+  "changes": "source",
+  "reconnect": "sync",
+  "disable": "sync",
+  "enable": "sync"
+}

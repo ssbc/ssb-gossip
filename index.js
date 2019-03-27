@@ -1,7 +1,6 @@
 'use strict'
 var pull = require('pull-stream')
 var Notify = require('pull-notify')
-var mdm = require('mdmanifest')
 var valid = require('muxrpc-validation')({})
 
 var u = require('./util')
@@ -76,7 +75,7 @@ Peers : [{
 module.exports = {
   name: 'gossip',
   version: '1.0.0',
-  manifest: mdm.manifest(fs.readFileSync(path.join(__dirname, 'api.md'), 'utf8')),
+  manifest: require('./manifest.json'),
   permissions: {
     anonymous: {allow: ['ping']}
   },
@@ -427,4 +426,5 @@ module.exports = {
     return gossip
   }
 }
+
 
