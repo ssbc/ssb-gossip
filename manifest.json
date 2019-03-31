@@ -7,5 +7,6 @@
   "reconnect": "sync",
   "disable": "sync",
   "enable": "sync",
-  "ping": "duplex"
+  "ping": "duplex",
+  "help": "sync"
 }
