@@ -1,8 +1,6 @@
 # ssb-server gossip plugin
 
-Schedule connections randomly with a peerlist constructed from config, multicast UDP announcements, feed announcements, and API-calls.
-
-
+Schedule connections randomly with a **peerlist** constructed from config, multicast [UDP](https://ssbc.github.io/scuttlebutt-protocol-guide/#discovery) announcements, [feed](https://ssbc.github.io/scuttlebutt-protocol-guide/#feeds) announcements, and API-calls.
 
 ## peers: sync
 
@@ -15,8 +13,6 @@ peers
 ```js
 peers(cb)
 ```
-
-
 
 ## add: sync
 
