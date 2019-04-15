@@ -347,7 +347,7 @@ module.exports = {
         pull(
           pp,
           rpc.gossip.ping({timeout: timer_ping}, function (err) {
-            if(err.name === 'TypeError') peer.ping.fail = true
+            if(err && err.name === 'TypeError') peer.ping.fail = true
           }),
           pp
         )
