@@ -14,8 +14,6 @@ peers
 peers(cb)
 ```
 
-
-
 ## add: sync
 
 Add an address to the peer table.
