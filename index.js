@@ -1,7 +1,6 @@
 'use strict'
 var pull = require('pull-stream')
 var Notify = require('pull-notify')
-var mdm = require('mdmanifest')
 var valid = require('muxrpc-validation')({})
 
 var u = require('./util')
@@ -76,7 +75,7 @@ Peers : [{
 module.exports = {
   name: 'gossip',
   version: '1.0.0',
-  manifest: mdm.manifest(fs.readFileSync(path.join(__dirname, 'api.md'), 'utf8')),
+  manifest: require('./manifest.json'),
   permissions: {
     anonymous: {allow: ['ping']}
   },
@@ -176,10 +175,15 @@ module.exports = {
       },
       connect: function (addr, cb) {
         if(!addr) return cb(new Error('ssb-gossip.connect: address, or peer id must be provided'))
-        if(ref.isFeed(addr))
+        if(ref.isFeed(addr)) {
+          const id = addr
           addr = gossip.get(addr)
+          if(!addr) return cb(new Error('no known address for peer:'+id))
+        }
+
         if(!ref.isAddress(addr.address))
           addr = ref.parseAddress(addr)
+
         if (!addr || typeof addr != 'object')
           return cb(new Error('first param must be an address'))
 
@@ -237,6 +241,9 @@ module.exports = {
         if(isObject(addr)) {
           //console.log(addr)
           addr.address = coearseAddress(addr)
+        }
+        else if(ref.isAddress(addr)) {
+          addr = {address: addr, key: ref.getKeyFromAddress(addr)}
         }
         else {
          var _addr = ref.parseAddress(addr)
@@ -419,4 +426,5 @@ module.exports = {
     return gossip
   }
 }
+
 
