@@ -2,11 +2,23 @@
 
 ssb-server gossip plugin
 
-Schedule connections randomly with a **peerlist** constructed from config, multicast [UDP](https://ssbc.github.io/scuttlebutt-protocol-guide/#discovery) announcements, [feed](https://ssbc.github.io/scuttlebutt-protocol-guide/#feeds) announcements, and API-calls.
+to have a peer to peer network, a ssb instance needs to have some other peers to connect with.
+This module keeps track of those peers. There are a number of ways a you can know about a peer,
+
+* observed a local udp broadcast from them [ssb-server/plugins/local](https://github.com/ssbc/ssb-server/blob/master/plugins/local.js)
+* received their device-address message [ssb-device-address](https://github.com/ssbc/ssb-device-address)
+* received a pub message about them [ssb-gossip/init](https://github.com/ssbc/ssb-gossip/blob/master/init.js#L14-L29)
+* configured their address manually as a [seed](https://github.com/ssbc/ssb-gossip/blob/master/init.js#L11-L12)
+* or the user called [gossip.add](#add-sync)
+
+Notice these are mostly managed by other plugins.
+
+The gossip plugin then decides when to connect to those peers, which it does mostly randomly.
+(connecting randomly means you will _eventually_ connect to everyone, thus a useful database property: [eventual consistency](https://en.wikipedia.org/wiki/Eventual_consistency)) 
 
 ## peers: sync
 
-Get the current peerlist.
+Get the current known peers.
 
 ```bash
 peers
@@ -18,10 +30,12 @@ peers(cb)
 
 ## add: sync
 
-Add an address to the peer table.
+Add a peer.
 
 ```bash
+#add a multiserver address.
 add {addr}
+#legacy format
 add --host {string} --port {number} --key {feedid}
 ```
 
@@ -30,7 +44,7 @@ add(addr, cb)
 add({ host:, port:, key: }, cb)
 ```
 
- - `addr` (address string): An address string, of the following format: `hostname:port:feedid`.
+ - `addr` (address string): A [multiserver address](https://github.com/ssbc/multiserver#address-format)
  - `host` (host string): IP address or hostname.
  - `port` (port number)
  - `key` (feedid)
@@ -131,4 +145,5 @@ disable(type, cb)
 ## License
 
 MIT
+
 
