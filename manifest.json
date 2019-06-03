@@ -9,5 +9,9 @@
   "enable": "sync",
   "ping": "duplex",
   "get": "sync",
-  "peers": "sync"
+  "peers": "sync",
+  "help": "sync"
 }
+
+
+

@@ -310,7 +310,8 @@ module.exports = {
         type = type || 'global'
         setConfig(type, false)
         return 'disabled gossip type ' + type
-      }, 'string?')
+      }, 'string?'),
+      help: function () { return require('./help') }
     }
 
     closeScheduler = Schedule (gossip, config, server)
