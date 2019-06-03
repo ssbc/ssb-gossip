@@ -1,7 +1,7 @@
 {
   "name": "ssb-gossip",
   "description": "",
-  "version": "1.0.10",
+  "version": "1.1.0",
   "homepage": "https://github.com/dominictarr/ssb-gossip",
   "repository": {
     "type": "git",
