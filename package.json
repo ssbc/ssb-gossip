@@ -12,7 +12,6 @@
     "deep-equal": "^1.0.1",
     "has-network": "0.0.1",
     "ip": "^1.1.5",
-    "mdmanifest": "^1.0.8",
     "muxrpc-validation": "^3.0.0",
     "on-change-network": "0.0.2",
     "on-wakeup": "^1.0.1",
