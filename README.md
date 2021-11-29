@@ -2,6 +2,8 @@
 
 ssb-server gossip plugin
 
+⚠️  See also: [ssb-conn](https://github.com/staltz/ssb-conn)
+
 to have a peer to peer network, a ssb instance needs to have some other peers to connect with.
 This module keeps track of those peers. There are a number of ways a you can know about a peer,
 
